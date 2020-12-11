@@ -1,0 +1,38 @@
+{
+  "name": "das-paddel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npm run build && electron .",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "electron-rebuild"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4",
+    "@types/lodash": "^4.14.117",
+    "@types/mocha": "^5",
+    "@types/node": "^10",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "all-your-base": "^0.3.0",
+    "autoprefixer": "^10.1.0",
+    "electron": "^9",
+    "electron-rebuild": "^2.3.4",
+    "lodash": "^4",
+    "moment": "^2",
+    "postcss-loader": "^4.1.0",
+    "rxjs": "^5",
+    "tailwindcss": "^2.0.1",
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "serialport": "^8"
+  }
+}
