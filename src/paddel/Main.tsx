@@ -1,68 +1,79 @@
+import {
+  AppBar,
+  Button,
+  Card,
+  List,
+  Grid,
+  Toolbar,
+  CardContent,
+  CssBaseline,
+  ListItem,
+} from "@material-ui/core";
+import Container from "@material-ui/core/Container/Container";
+import Typography from "@material-ui/core/Typography/Typography";
 import React from "react";
-import { Units, WaterRower } from "./lib/index";
+import { SettingsContext, WaterRowerContext } from "../component";
+import { useStyles } from "./main_styles";
+import { Stats } from "./stats";
+import { useWatterrower } from "./waterrower/state_hook";
 
 // waterrower.playRecording('simulationdata');
 // console.log('Playing \'simulationdata\'');
-let waterrower = new WaterRower({
-  datapoints: [
-    "ms_distance",
-    "m_s_total",
-    "m_s_average",
-    "total_kcal",
-    "stroke_average",
-    "workout_stroke",
-    "tank_volume",
-    "strokes_cnt",
-    "stroke_rate",
-    "distance",
-  ],
-  refreshRate: 1000,
-  dataDirectory: "data",
-});
-waterrower.on("initialized", () => {
-  console.log("initialized");
-  waterrower.reset();
-});
 
 export interface MainProps {}
 
-const setWorkout = (waterrower: WaterRower, distance: number) => {
-  waterrower.defineDistanceWorkout(distance, Units.Meters);
-};
-
-setWorkout(waterrower, 5000);
-
 export const Main = (props: MainProps) => {
-  const [distanceData, setDistanceData] = React.useState([]);
-  const [msData, setMsData] = React.useState([]);
-  const [msAverage, setMsAverage] = React.useState([]);
-  const [totalCal, setTotalCal] = React.useState([]);
-  const [data, setData] = React.useState([]);
-
-  waterrower.on("data", (d) => {
-    // console.log("d", d);
-    if (d.name === "distance") {
-      setDistanceData([...distanceData, d.value]);
-    }
-    if (d.name === "m_s_total") {
-      setMsData([...msData, d.value]);
-    }
-    if (d.name === "m_s_average") {
-      setMsAverage([...msAverage, d.value]);
-    }
-    if (d.name === "total_kcal") {
-      setTotalCal([...totalCal, d.value]);
-    }
-    setData([...data, d]);
-  });
+  const { waterrower, status, setStatus } = React.useContext(WaterRowerContext);
+  const { debug } = React.useContext(SettingsContext);
+  const classes = useStyles();
+  const { data, strokeRate, msData, totalCal, distance } = useWatterrower(
+    waterrower,
+    setStatus,
+    debug
+  );
 
   return (
-    <ul>
-      <h1>distance: {distanceData[distanceData.length - 1]}</h1>
-      <h1>msData: {msData[msData.length - 1]}</h1>
-      <h1>msAverage: {msAverage[msAverage.length - 1]}</h1>
-      <h1>totalCal: {totalCal[totalCal.length - 1]}</h1>
-      <p>data: {JSON.stringify(data)}</p>
-    </ul>
+    <>
+      <CssBaseline />
+      <AppBar position="relative">
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap>
+            Das Paddel
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <main>
+        <Container maxWidth="lg" className={classes.cardGrid}>
+          {status === "not-connected" && (
+            <Typography variant="h6" color="inherit" noWrap>
+              Please connect your Waterrower
+            </Typography>
+          )}
+          {status !== "not-connected" && (
+            <Stats
+              distanceData={distance}
+              msData={msData}
+              strokeRate={strokeRate}
+              totalCal={totalCal}
+            />
+          )}
+          <Grid item>
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Debug
+                </Typography>
+                {JSON.stringify(data[data.length - 1])}
+                {/* <List>
+                  {data.map((d, i) => (
+                    <ListItem key={i}>{JSON.stringify(d)}</ListItem>
+                  ))}
+                </List> */}
+              </CardContent>
+            </Card>
+          </Grid>
+        </Container>
+      </main>
+    </>
   );
 };

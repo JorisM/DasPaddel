@@ -1,5 +1,7 @@
 import { Observable, Subject } from 'rxjs/Rx';
-import * as SerialPort from 'serialport';
+// import * as SerialPort from 'serialport';
+const SerialPort = require('serialport')
+
 import * as ayb from 'all-your-base';
 import { padStart, find, includes } from "lodash";
 import * as events from 'events';
@@ -13,7 +15,7 @@ import * as path from 'path';
 export class WaterRower extends events.EventEmitter {
     private refreshRate: number = 200;
     private baudRate: number = 19200;
-    private port: SerialPort;
+    private port: any;
     private dataDirectory: string = 'lib/data';
     private datapoints: string | string[];
     private recordingSubscription;
@@ -57,7 +59,7 @@ export class WaterRower extends events.EventEmitter {
     }
 
     private discoverPort(callback) {
-        SerialPort.list((err, ports) => {
+        SerialPort.list().then((ports) => {
             const p = find(ports, p => includes([
                 'Microchip Technology, Inc.', // standard
                 'Microchip Technology Inc.' // macOS specific?
