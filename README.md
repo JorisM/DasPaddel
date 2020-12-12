@@ -22,6 +22,7 @@ notice: set debug flag in (`src/component.tsx`) to false if you want to test it 
 
 ## TODO
 - [ ] draw a ui
+  - proposal for the workouts: define workout blocks (title, body, duration, distance: optional (only set if you need to row)). then before you start a workout, you drag the blocks into a list, which will be played in order.
 - [ ] properly extend from https://github.com/codefoster/waterrower and say thank you
 - [ ] define a config format for the workouts and import
 - [ ] import past trainings and summarize them
