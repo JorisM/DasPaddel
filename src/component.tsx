@@ -7,24 +7,19 @@ import { Main } from "./paddel/main";
 import theme from "./theme";
 
 const defaultSettings: Settings = {
-  debug: true,
+  debug: false,
 };
 
 let waterrower = new WaterRower({
   datapoints: [
-    "ms_distance",
-    "m_s_total",
     "m_s_average",
     "total_kcal",
-    "stroke_average",
-    "workout_stroke",
     "tank_volume",
-    "strokes_cnt",
     "stroke_rate",
     "distance",
     "workout_time",
   ],
-  refreshRate: 1000,
+  refreshRate: 200,
   dataDirectory: "data",
 });
 

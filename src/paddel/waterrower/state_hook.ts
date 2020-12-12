@@ -12,10 +12,11 @@ export const useWatterrower = (waterrower: WaterRower, setStatus: (status: Statu
   const [data, setData] = React.useState([]);
 
   const updateApp = (d) => {
+    console.log('name, value', d.name, d.value)
     if (d.name === "distance") {
       setDistance(state => [...state, d.value]);
     }
-    if (d.name === "m_s_total") {
+    if (d.name === "m_s_average") {
       setMsData(state => [...state, d.value]);
     }
 
@@ -24,7 +25,8 @@ export const useWatterrower = (waterrower: WaterRower, setStatus: (status: Statu
         //   body: d.value
         // })
     }
-    if (d.name === "m_s_average") {
+    if (d.name === "stroke_rate") {
+      console.log('stroke rate', d.name, d.value)
       setStrokeRate(state => [...state, d.value]);
     }
     if (d.name === "total_kcal") {

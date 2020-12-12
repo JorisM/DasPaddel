@@ -27,6 +27,16 @@ export const Stats = (props: StatsProps) => {
       <Grid item>
         <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
+            {"Time"}
+            <Typography gutterBottom variant="h5" component="h2">
+              {workoutTime[workoutTime.length - 1]}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item>
+        <Card className={classes.card}>
+          <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h5" component="h2">
               distance
             </Typography>
@@ -36,18 +46,17 @@ export const Stats = (props: StatsProps) => {
           </CardContent>
         </Card>
       </Grid>
-      {workoutTime[workoutTime.length - 1]}
       <Grid item>
         <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h5" component="h2">
-              ms
+              m/s
             </Typography>
             <Typography variant="h4" component="h2">
               {msData[msData.length - 1]}
             </Typography>
             <LineChart
-              title="Strokes"
+              title="meters per second"
               color="red"
               data={msData.map((d, i) => {
                 return {
@@ -70,7 +79,7 @@ export const Stats = (props: StatsProps) => {
               {strokeRate[strokeRate.length - 1]}
             </Typography>
             <LineChart
-              title="M/S"
+              title="strokerate"
               color="blue"
               data={strokeRate.map((d, i) => {
                 return {

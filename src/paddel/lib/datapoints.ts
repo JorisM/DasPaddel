@@ -2,7 +2,7 @@ export default [
     //performance variables
     { name: 'mph', address: '1A3', length: 'D', value: null },
     { name: 'stroke_rate', address: '1A9', length: 'S', value: null },
-        
+
     //screen mode variables
     { name: 'screen_mode', address: '00D', length: 'S', radix: 16, value: null },
     { name: 'screen_sub_mode', address: '00E', length: 'S', radix: 16, value: null },
@@ -25,14 +25,14 @@ export default [
     //?
     { name: 'pins_per_xxcm', address: '083', length: 'S', radix: 16, value: null },
     { name: 'distance_xxcm', address: '084', length: 'S', radix: 16, value: null },
-    
+
     //Locations between these are not used and should read as 0, these maybe used if space is required
     { name: 'kcal_watts', address: '088', length: 'D', radix: 16, value: null },
     { name: 'total_kcal', address: '08A', length: 'D', radix: 16, value: null },
 
     //tank volume in liters
     { name: 'tank_volume', address: '0A9', length: 'S', radix: 16, value: null },
-    
+
     //BANK 1
     //stroke counter
     //stroke_pull is first subtracted from stroke_average then a modifier of 1.25 multiplied by the result to generate the ratio value for display
