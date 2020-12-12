@@ -16,6 +16,7 @@ import { SettingsContext, WaterRowerContext } from "../component";
 import { useStyles } from "./main_styles";
 import { Stats } from "./stats";
 import { useWatterrower } from "./waterrower/state_hook";
+import { Choose } from "./workouts/choose";
 
 // waterrower.playRecording('simulationdata');
 // console.log('Playing \'simulationdata\'');
@@ -26,11 +27,14 @@ export const Main = (props: MainProps) => {
   const { waterrower, status, setStatus } = React.useContext(WaterRowerContext);
   const { debug } = React.useContext(SettingsContext);
   const classes = useStyles();
-  const { data, strokeRate, msData, totalCal, distance } = useWatterrower(
-    waterrower,
-    setStatus,
-    debug
-  );
+  const {
+    data,
+    strokeRate,
+    msData,
+    totalCal,
+    distance,
+    workoutTime,
+  } = useWatterrower(waterrower, setStatus, debug);
 
   return (
     <>
@@ -50,12 +54,16 @@ export const Main = (props: MainProps) => {
             </Typography>
           )}
           {status !== "not-connected" && (
-            <Stats
-              distanceData={distance}
-              msData={msData}
-              strokeRate={strokeRate}
-              totalCal={totalCal}
-            />
+            <>
+              <Choose />
+              <Stats
+                distanceData={distance}
+                msData={msData}
+                strokeRate={strokeRate}
+                totalCal={totalCal}
+                workoutTime={workoutTime}
+              />
+            </>
           )}
           <Grid item>
             <Card className={classes.card}>

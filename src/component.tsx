@@ -22,6 +22,7 @@ let waterrower = new WaterRower({
     "strokes_cnt",
     "stroke_rate",
     "distance",
+    "workout_time",
   ],
   refreshRate: 1000,
   dataDirectory: "data",

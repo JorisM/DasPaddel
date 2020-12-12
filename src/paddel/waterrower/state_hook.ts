@@ -7,6 +7,8 @@ export const useWatterrower = (waterrower: WaterRower, setStatus: (status: Statu
   const [msData, setMsData] = React.useState([]);
   const [strokeRate, setStrokeRate] = React.useState([]);
   const [totalCal, setTotalCal] = React.useState([]);
+  const [workoutTime, setWorkoutTime] = React.useState([]);
+
   const [data, setData] = React.useState([]);
 
   const updateApp = (d) => {
@@ -16,13 +18,21 @@ export const useWatterrower = (waterrower: WaterRower, setStatus: (status: Statu
     if (d.name === "m_s_total") {
       setMsData(state => [...state, d.value]);
     }
+
+    if (d.name === "tank_volume") {
+        // new Notification('Tank Volume',{
+        //   body: d.value
+        // })
+    }
     if (d.name === "m_s_average") {
       setStrokeRate(state => [...state, d.value]);
     }
     if (d.name === "total_kcal") {
       setTotalCal(state => [...state, d.value]);
     }
-    console.log("d", data);
+    if (d.name === "workout_time") {
+      setWorkoutTime(state => [...state, d.value]);
+    }
     setData(state => [...state, d]);
   };
 
@@ -52,7 +62,8 @@ export const useWatterrower = (waterrower: WaterRower, setStatus: (status: Statu
     msData,
     strokeRate,
     data,
-    totalCal
+    totalCal,
+    workoutTime
   }
 
 }
